@@ -8,7 +8,7 @@ public class LightSwitchView : MonoBehaviour, IInteractable
 
 
     public delegate void LightSwitchDelegate();  //signature -  signature is return type should be void and there should no parameter
-    public LightSwitchDelegate lightSwitch;      //instance
+    public static LightSwitchDelegate lightSwitch;      //instance
 
     private void Start() => currentState = SwitchState.Off;
 
