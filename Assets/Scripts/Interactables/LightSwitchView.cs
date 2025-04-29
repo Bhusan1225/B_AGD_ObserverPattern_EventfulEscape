@@ -15,7 +15,7 @@ public class LightSwitchView : MonoBehaviour, IInteractable
 
     private void OnEnable()
     {
-        lightSwitch = OnLightSwitchToggle;
+        lightSwitch += OnLightSwitchToggle;  
     }
     public void Interact()
     {
@@ -49,6 +49,9 @@ public class LightSwitchView : MonoBehaviour, IInteractable
 
     private void OnLightSwitchToggle()
     {
+
+        //custom logic for light switch
+        Debug.Log(" LightSwitchView -> OnLightSwitchToggle");
         toggleLights();
         GameService.Instance.GetInstructionView().HideInstruction();
         GameService.Instance.GetSoundView().PlaySoundEffects(SoundType.SwitchSound);

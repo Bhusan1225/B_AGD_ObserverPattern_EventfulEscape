@@ -26,7 +26,7 @@ public class PlayerController
         this.playerScriptableObject = playerScriptableObject;
         this.playerScriptableObject.KeysEquipped = 0;
 
-        
+        LightSwitchView.lightSwitch += OnLightSwitchToggled;
 
         playerState = PlayerState.InDark;
     }
@@ -76,7 +76,7 @@ public class PlayerController
         position = (transform.position) + (velocity * movement) * Time.fixedDeltaTime;
     }
 
-    private void LightSwitchToggle()
+    private void OnLightSwitchToggled()
     {
 
     }
