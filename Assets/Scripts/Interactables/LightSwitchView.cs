@@ -1,4 +1,5 @@
- using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class LightSwitchView : MonoBehaviour, IInteractable
@@ -7,21 +8,26 @@ public class LightSwitchView : MonoBehaviour, IInteractable
     private SwitchState currentState;
 
 
-    public delegate void LightSwitchDelegate();  //signature -  signature is return type should be void and there should no parameter
-    public static event LightSwitchDelegate lightSwitch;      //instance
+    
 
+    public static event Action lightToggledAction;
     private void Start() => currentState = SwitchState.Off;
 
 
     private void OnEnable()
     {
-        lightSwitch += OnLightSwitchToggle;  
+        lightToggledAction += OnLightSwitchToggle;   //subscription
     }
+    private void OnDisable()
+    {
+        lightToggledAction -= OnLightSwitchToggle;  //unsubsriribe
+    }
+
     public void Interact()
     {
-      
 
-        lightSwitch.Invoke(); // call the instance
+
+        lightToggledAction?.Invoke(); 
 
     }
     private void toggleLights()
