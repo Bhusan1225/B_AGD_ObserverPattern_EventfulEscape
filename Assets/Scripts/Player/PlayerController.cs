@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,12 +28,16 @@ public class PlayerController
         playerState = PlayerState.InDark;
 
         EventService.Instance.OnLightSwitchToggled.AddListener(onLightSwitch);
+        EventService.Instance.OnLightsOffByGhostEvent.AddListener(onLIghtTurnedOffByGhost);
         EventService.Instance.OnKeyPickedUp.AddListener(onKeysPickedUp);
     }
 
+    
+ 
     ~PlayerController()
     {
         EventService.Instance.OnLightSwitchToggled.RemoveListener(onLightSwitch);
+        EventService.Instance.OnLightsOffByGhostEvent.RemoveListener(onLIghtTurnedOffByGhost);
         EventService.Instance.OnKeyPickedUp.RemoveListener(onKeysPickedUp);
     }
     public void Interact() => IsInteracted = Input.GetKeyDown(KeyCode.E) ? true : (Input.GetKeyUp(KeyCode.E) ? false : IsInteracted);
@@ -91,4 +96,6 @@ public class PlayerController
     {
         KeysEquipped = keys;
     }
+
+    private void onLIghtTurnedOffByGhost() => PlayerState = PlayerState.InDark;
 }
